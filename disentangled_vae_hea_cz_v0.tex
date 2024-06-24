@@ -28,6 +28,7 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{booktabs}
+\usepackage{color}
 
 \usepackage[colorinlistoftodos]{todonotes}
 
@@ -35,7 +36,7 @@
 
 
 
-\cz{I removed the banner header as we usually submit Materials design work to arXiv rather than EngrXiv.}
+
 %\renewcommand{\headrulewidth}{0pt}
 % \fancyhead[L]{Posted: \today}
 % \fancyhead[R]{
@@ -51,11 +52,14 @@
 \affil[$\dag$]{These authors contribute equally: Zulqarnain Khan, Cheng Zeng.}
 \affil[*]{Corresponding author: \email{z.khan@northeastern.edu}, \email{c.zeng@northeastern.edu}}
 \date{}
-\cz{Added the author info, but we can discuss...}
 
 \begin{document}
 \maketitle
 \thispagestyle{fancy}
+
+% \cz{I removed the banner header as we usually submit Materials design work to arXiv rather than EngrXiv.}
+
+% \cz{Added the author info, but we can discuss...}
 
 \begin{abstract}
 Your abstract.
@@ -64,20 +68,25 @@ Your abstract.
 \section{Introduction}
 
 %%%% Materials importance and Materials design history
-Materials play a pivotal role in shaping the modern society and many grand technology challenges are in essence materials challenges, ranging from lower-cost battery materials for energy storage, to quantum computing materials and bio-compatible materials for healthcare applications~\cite{}.
-Thanks to advances in high-throughput computing~\cite{}, robotics~\cite{}, machine learning force fields~\cite{} and materials open datasets~\cite{}, materials design and discovery have now reached an unprecedented rate and scale~\cite{}.
-Although advances in algorithm and hardware significantly reduce the computation time for each iteration, it can still take extensive iterations to locate a number of materials candidates with desired properties~\cite{}.
+Materials play a pivotal role in shaping the modern society and many grand technology challenges are in essence materials challenges, ranging from lower-cost battery materials for energy storage, to quantum computing materials and bio-compatible materials for healthcare applications~\cite{li2017,de2021,tahmasebi2020}.
+Thanks to advances in high-throughput computing~\cite{merchant2023}, robotics~\cite{szymanski2023}, machine learning force fields~\cite{merchant2023} and materials open datasets~\cite{jain2013, choudhary2020}, materials design and discovery have now reached an unprecedented rate and scale~\cite{knapp2022}.
+Although advances in algorithm and hardware significantly reduce the computation time for each iteration, it can still take extensive iterations or computation to pinpoint a small range of potential materials candidates with desired properties~\cite{zeng2024}.
 
 %%%% Inverse materials design, its state-of-the-art, limitations
-Inverse materials design unlock the potential to identify new materials using the target property as the input~\cite{}.
-However, current inverse materials design primarily uses a generative model with an unsupervised learning flavor to learn a latent compact representation of materials, and it assumes that the learned latent space will implicitly entangle the relationship between materials representations and target properties~\cite{}.
+Inverse materials design unlock the potential to identify new materials using the target property as the input.
+Wang et al ~\cite{wang2022} reviewed three methods for inverse materials design, including high-throughput virtual screening~\cite{afzal2019}, global optimization~\cite{geng2019} and generative models~\cite{ma2019, popova2018}.
+Generative models are probably the most efficient approach as it learns a compact low-dimensional representation and can generates new data using the latent-space encoded knowledge.
+Comparing various generative models, a study by T\"{u}rk et al showed that variational autoencoder (VAE) is more robust than reinforcement learning and generative adversarial networks because VAE has a better representation of underlying distributions and training a VAE model is easier~\cite{turk2022}.
+However, current generative models are primarily present as an unsupervised learning approach which learns a latent space assumed to entangle the relationship between materials representations and target properties~\cite{chen2020, wang2022}.
 It is not ideal as one will need to perform post-optimization to explore materials with better target properties and may even fail to find any useful materials.
-A recent work by Xie and Tomioka et al introduced diffusion-based generative processes together with a fine tuning process to discover materials with multiple target properties such as magnetic property and supply chain risk~\cite{}.
-Although a state-of-the-art discovery rate and materials stability were reported, the full periodicity of the crystal structures restricts the design space for inorganic materials, the complexity of large datasets and diffusion models hinder a wider application and the interpretability of the methods, and the practicality of the new materials discovered in this process is doubtful without an expert insight~\cite{}.
+A recent work by Xie and Tomioka et al introduced diffusion-based generative processes together with a fine tuning process to discover materials with multiple target properties such as magnetic property and supply chain risk~\cite{zeni2024}.
+Although a state-of-the-art discovery rate and materials stability were reported, the full periodicity of the crystal structures restricts the design space for inorganic materials, the complexity of large datasets and diffusion models hinder a wider application and the interpretability of the methods, and the practicality of the new materials discovered in this process is doubtful without an expert insight~\cite{cheetham2024}.
 
 %%% The need and summary of our work
 Therefore, there is an urgent need to create a workflow for inverse materials design that is data efficient, interpretable and can be geared towards multi-property optimization.
 Here we introduced a disentangled generative model using a semi-supervised variational autoencoder for the inverse design of complex materials.
+We demonstrated this approach on the inverse design of single-phase high-entropy alloys.
+This approach can utilize both labelled and unlabelled data sets. The proposed methods are highly versatile and robust, and can be readily extended to other engineering domains where there exists a probabilistic structure/composition-property relationship.
 
 \section{Proposed Model}
 
@@ -87,6 +96,6 @@ Here we introduced a disentangled generative model using a semi-supervised varia
 
 
 \bibliographystyle{bibstyle}
-\bibliography{refs}
+\bibliography{references}
 
 \end{document}
