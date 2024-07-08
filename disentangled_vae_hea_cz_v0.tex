@@ -17,7 +17,7 @@
 \usepackage[parfill]{parskip}
 \renewcommand*\oldstylenums[1]{\carlitoOsF #1}
 \usepackage{fancyhdr}
-\usepackage{natbib}
+% \usepackage{natbib}
 \usepackage{authblk}
 \setlength{\headheight}{41pt}
 
@@ -91,7 +91,23 @@ This approach can utilize both labelled and unlabelled data sets. The proposed m
 
 \section{Methods \& Theories}
 \subsection{Data set}
+This work uses an experimental data set where inputs are chemical compositions of alloys and outputs are binary phase predictions indicating the formation of single phase (\textbf{SP}: 1) versus multiple phases (\textbf{MP}: 0).
+A summary of this dataset is shown in Figure~\ref{fig:dataset}.
+It is an up-to-date and well-recognized dataset for HEA single phase prediction collected by Yan et al~\cite{yan2021}.
+Empirical rules suggest that the single phase formation relies more on the synergistic effects of mixing different alloys rather than the independent attributes of each element~\cite{yan2021, pei2020}.
+Therefore, eight engineered features are used rather than element-wise compositions.
+The eight features include bulk modulus, molar volume, melting temperature, valence electron concentration, atomic size difference, Pauling electronegativity difference, mixing entropy and mixing enthalpy.
+Methods to calculate these features can be found in the supporting information of our previous work~\cite{zeng2024}.
+Those eight features were found to be informative for the prediction of single phase formation~\cite{zeng2024, yan2021}.
+More importantly, this feature engineering provides a general and compact representation of alloys comprising various elements, offering more generalizability for alloy design.
+Given that a experimental data set is used, the trained ML models can thus give predictions that are more likely to be manufactured in practice, without explicitly considering the manufacturing process and environmental conditions.
 
+\begin{figure}
+\centering
+\includegraphics[width=5.in]{figures/dataset.pdf}
+\caption{Experimental high-entropy alloy dataset for single phase formation.
+\label{fig:dataset}}
+\end{figure}
 
 \subsection{Proposed Model: Disentangled VAE}
 
