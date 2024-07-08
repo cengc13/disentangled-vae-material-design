@@ -73,8 +73,8 @@ Thanks to advances in high-throughput computing~\cite{merchant2023}, robotics~\c
 Although advances in algorithm and hardware significantly reduce the computation time for each iteration, it can still take extensive iterations or computation to pinpoint a small range of potential materials candidates with desired properties~\cite{zeng2024}.
 
 %%%% Inverse materials design, its state-of-the-art, limitations
-Inverse materials design unlock the potential to identify new materials using the target property as the input.
-Wang et al ~\cite{wang2022} reviewed three methods for inverse materials design, including high-throughput virtual screening~\cite{afzal2019}, global optimization~\cite{geng2019} and generative models~\cite{ma2019, popova2018}.
+Inverse materials design unlock the potential to optimize new materials towards a target property.
+In general there are three approaches for inverse materials design~\cite{wang2022}, including high-throughput virtual screening~\cite{afzal2019}, global optimization~\cite{geng2019} and generative models~\cite{ma2019, popova2018}.
 Generative models are probably the most efficient approach as it learns a compact low-dimensional representation and can generates new data using the latent-space encoded knowledge.
 Comparing various generative models, a study by T\"{u}rk et al showed that variational autoencoder (VAE) is more robust than reinforcement learning and generative adversarial networks because VAE has a better representation of underlying distributions and training a VAE model is easier~\cite{turk2022}.
 However, current generative models are primarily present as an unsupervised learning approach which learns a latent space assumed to entangle the relationship between materials representations and target properties~\cite{chen2020, wang2022}.
@@ -100,7 +100,7 @@ The eight features include bulk modulus, molar volume, melting temperature, vale
 Methods to calculate these features can be found in the supporting information of our previous work~\cite{zeng2024}.
 Those eight features were found to be informative for the prediction of single phase formation~\cite{zeng2024, yan2021}.
 More importantly, this feature engineering provides a general and compact representation of alloys comprising various elements, offering more generalizability for alloy design.
-Given that a experimental data set is used, the trained ML models can thus give predictions that are more likely to be manufactured in practice, without explicitly considering the manufacturing process and environmental conditions.
+Given that an experimental data set is used, the trained ML models can thus give predictions that are more likely to be manufactured in practice, without explicitly considering the manufacturing process and environmental conditions.
 
 \begin{figure}
 \centering
