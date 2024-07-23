@@ -141,7 +141,26 @@ Priors for the binary Phase $\phi$ are modeled using Bernoulli distribution and 
 While informed choices for the hyperparameters of these prior distributions can be made, starting with relatively non-informative choices  avoids introducing bias into the model. The phase prior can be chosen to bias the model towards observing more multiphase alloys vs single phase alloys, as that tends to be true in nature.
 
 \subsubsection{Recognition model}
+
+With the above generative model in place, we can now define the recognition model to perform inference. There are different acceptable recognition models given the above generative model. We propose one that conforms best to the our goals of enabling prediction, interpretation, and exploration. The recognition model $q_\psi(\phi, z | x)$  takes as input the data and maps it to the latent representation space, serving as the variational approximation to the otherwise intractable posterior distribution $p(\phi, z | x)$. We assume the recognition model factorizes as follows under a mean-field assumption:
+
+\begin{equation}
+    q(\phi, z | x)=q_{\psi_\phi}(\phi | f(x)) q_{\psi_z}(z|x, \phi)
+\end{equation}
+
+The idea behind this factorization is that, we know from prior knowledge that the Phase $\phi$ is well predicted by a physics informed hand-engineered transformation $f(x)$ [8]. Specifically this transformation takes in composition and outputs eight relevant physical descriptors [17]; atomic size difference, mixing enthalpy, mixing entropy, Pauli electronegativity difference, molar volume, bulk modulus, melting temperature and valence electron concentration. In turn the neural network $\psi_\phi$ uses these engineered features to predict the binary Phase. Note that $f(x)$ is a pre-specified transformation and not a learnable function. Finally the latent variable $z$ encodes everything else about the alloy $x$ conditioned upon values of phase. This recognition model allows us to encode hand-engineered features that we know are useful for predicting phase, and rely on the expressivity of neural networks to predict the appropriate values for energy properties as well as encode other information necessary for the eventual reconstruction of the training data through the decoder.
+
+
 \subsubsection{Model training}
+ We can train both the generative model and the recognition model simultaneously by maximizing the following variational objective function w.r.t the neural network parameters for the generative and recognition model:
+\begin{equation}
+    \sum_{n=1}^N \mathcal{L}(\theta, \psi_z, x^n) + \gamma \sum_{m=1}^M \mathcal{L}^\textit{sup}(\theta, \psi_\phi, \psi_z; x^m, \phi^m)
+\end{equation}
+
+The first part of this objective function optimizes over all $n={1, \ldots, N}$ data points for which supervision is not available. Here ={, Es, Esf, z}.  This is the standard VAE evidence lower bound (ELBO) loss, which can generally be thought of as learning to reconstruct input data with some regularization on the latent space. The second term is the supervised loss and uses points where supervision is available i.e. points for which values for phase, surface energy, and stacking fault energy are available
+��sup(, ; xm, ym) = Eqz(z | xm, ym)[logp(xm, ym, z)q(ym | xm)qz(z|ym, xm)] + (1+) log q(ym|xm)
+Where the constant  is a hyperparameter that balances between optimizing for prediction accuracy and reconstruction accuracy. The objective above can then be approximated using a Monte Carlo estimator as explained in [41]. We will utilize Pyro [42], a pytorch based probabilistic programming language, for model specification as well as training and inference.
+
 \subsubsection{Model deliverables}
 
 
