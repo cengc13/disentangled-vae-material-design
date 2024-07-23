@@ -54,6 +54,8 @@
 \affil[*]{Corresponding author: \email{z.khan@northeastern.edu}, \email{c.zeng@northeastern.edu}}
 \date{}
 
+\setlength {\marginparwidth }{2cm}
+
 \begin{document}
 \maketitle
 \thispagestyle{fancy}
@@ -75,18 +77,24 @@ Although advances in algorithm and hardware significantly reduce the computation
 
 %%%% Inverse materials design, its state-of-the-art, limitations
 Inverse materials design unlock the potential to optimize new materials towards a target property.
-In general there are three approaches for inverse materials design~\cite{wang2022}, including high-throughput virtual screening~\cite{afzal2019}, global optimization~\cite{geng2019} and generative models~\cite{ma2019, popova2018}.
+In general there are three approaches for inverse materials design~\cite{wang2022}, including high-throughput virtual screening~\cite{afzal2019}, global optimization~\cite{geng2019}, reinforcement learning~\cite{xian2024} and generative models~\cite{ma2019, popova2018}.
 Generative models are probably the most efficient approach as it learns a compact low-dimensional representation and can generates new data using the latent-space encoded knowledge.
 Comparing various generative models, a study by T\"{u}rk et al showed that variational autoencoder (VAE) is more robust than reinforcement learning and generative adversarial networks because VAE has a better representation of underlying distributions and training a VAE model is easier~\cite{turk2022}.
-However, current generative models are primarily present as an unsupervised learning approach which learns a latent space assumed to entangle the relationship between materials representations and target properties~\cite{chen2020, wang2022}.
+However, current generative models are primarily present as an unsupervised learning approach which learns a latent space assumed to entangle the relationship between materials representations and target properties~\cite{chen2020, wang2022, rao2022}.
 It is not ideal as one will need to perform post-optimization to explore materials with better target properties and may even fail to find any useful materials.
 A recent work by Xie and Tomioka et al introduced diffusion-based generative processes together with a fine tuning process to discover materials with multiple target properties such as magnetic property and supply chain risk~\cite{zeni2024}.
 Although a state-of-the-art discovery rate and materials stability were reported, the full periodicity of the crystal structures restricts the design space for inorganic materials, the complexity of large datasets and diffusion models hinder a wider application and the interpretability of the methods, and the practicality of the new materials discovered in this process is doubtful without an expert insight~\cite{cheetham2024}.
 
 %%% The need and summary of our work
 Therefore, there is an urgent need to create a workflow for inverse materials design that is data efficient, interpretable and can be geared towards multi-property optimization.
+Here the goal is to develop high-entropy alloys (HEAs) which tend to form a single-phase structure.
+Conventional methods to predict single-phase alloys rely on sophisticated design of experiments, thermodynamic modeling and first-principles calculations, which are not efficient search for high-entropy alloys  because the number of points to search grow combinatorially with the increase of elements~\cite{yao2017, feng2021}.
+For example, a HEA with five possible elements and each element has an integer composition between 5\% and 35\%, the number of possible compositions is on the order of 10$^7$, let along the massive numbers of possible atomic arrangement for each composition.
+Although machine learning algorithms have proven to speed up the search of corrosion-resistance or mechanically strong HEAs~\cite{zeng2024, yan2021, tandoc2023}, this forward design strategy still needs to scan a wide configuration and composition space.
+Inverse design is theorized to be a much more robust approach as it learns a probabilistic relationship between materials representation and a compact latent space where new materials candidates can be generated from this relationship.
+Coupled with an uncertainty estimate, search directions for new materials can be identified with a risk quantification~\cite{rao2022}.
 Here we introduced a disentangled generative model using a semi-supervised variational autoencoder for the inverse design of complex materials.
-We demonstrated this approach on the inverse design of single-phase high-entropy alloys.
+We demonstrated this approach on single-phase high-entropy alloys.
 Although our demonstration focuses on single materials property (single phase formation), the approach can also be applied to materials discovery with multi-objective targets.
 This approach can utilize both labelled and unlabelled data sets. The proposed methods are highly versatile and robust, and can be readily extended to other engineering domains where there exists a probabilistic structure/composition-property relationship.
 
